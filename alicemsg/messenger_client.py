@@ -1,4 +1,6 @@
-from .models import CallbackRequest, TextMessageRequest
+from .models.messages import Message
+from .models.requests import CallbackRequest, TextMessageRequest
+from .models.responses import AliceResponse
 
 
 class MessengerClient:
@@ -37,6 +39,9 @@ class MessengerClient:
                 locale=msg_json['meta']['locale'], timezone=msg_json['meta']['timezone'],
                 text=msg_json['request']['command'], tokens=msg_json['request']['nlu']['tokens'])
             message = self.text_message_processor(request)
+            if not isinstance(message, Message):
+                raise TypeError('message must be an instance of Message')
+            return AliceResponse(message=message, session=msg_json['session'], version=msg_json['version'])
         elif msg_json['request']['type'] == 'ButtonPressed':
             if not self.callback_processor:
                 return None
@@ -45,5 +50,8 @@ class MessengerClient:
                 locale=msg_json['meta']['locale'], timezone=msg_json['meta']['timezone'],
                 payload=msg_json['request']['payload'])
             message = self.callback_processor(request)
+            if not isinstance(message, Message):
+                raise TypeError('message must be an instance of Message')
+            return AliceResponse(message=message, session=msg_json['session'], version=msg_json['version'])
         else:
             raise ValueError('msg_json.request.type must have value "SimpleUtterance" or "ButtonPressed"')

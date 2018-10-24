@@ -31,14 +31,3 @@ class TextMessageRequest(object):
         self.timezone = timezone
         self.text = text
         self.tokens = tokens
-
-
-class Message(object):
-    def __init__(self, text: str, buttons: list = None):
-        if not isinstance(text, str):
-            raise TypeError('Message.text must be an instance of str')
-        self.text = text
-        if buttons:
-            if not isinstance(buttons, list):
-                raise TypeError('Message.buttons must be an instance of list')
-            self.buttons = buttons
