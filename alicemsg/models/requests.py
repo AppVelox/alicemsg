@@ -1,13 +1,11 @@
 class CallbackRequest(object):
-    def __init__(self, session: dict, locale: str, timezone: str, payload: str):
+    def __init__(self, session: dict, locale: str, timezone: str, payload):
         if not isinstance(session, dict):
             raise TypeError('CallbackRequest.session must be an instance of dict')
         if not isinstance(locale, str):
             raise TypeError('CallbackRequest.locale must be an instance of str')
         if not isinstance(timezone, str):
             raise TypeError('CallbackRequest.timezone must be an instance of str')
-        if not isinstance(payload, str):
-            raise TypeError('CallbackRequest.payload must be an instance of str')
         self.session = session
         self.locale = locale
         self.timezone = timezone
