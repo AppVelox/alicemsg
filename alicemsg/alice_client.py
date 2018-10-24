@@ -10,7 +10,7 @@ class AliceClient:
 
     def register_text_message_processor(self):
         def add(processor):
-            self.message_processor = processor
+            self.text_message_processor = processor
             return processor
 
         return add
