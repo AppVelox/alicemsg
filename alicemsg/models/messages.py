@@ -2,8 +2,9 @@ class Button(object):
     def __init__(self, title: str, url: str = None, payload=None, hide: bool = True):
         if not isinstance(title, str):
             raise TypeError('Button.title must be an instance of str')
-        if not isinstance(url, str):
-            raise TypeError('Button.url must be an instance of str')
+        if url is not None:
+            if not isinstance(url, str):
+                raise TypeError('Button.url must be an instance of str')
         if not isinstance(hide, bool):
             raise TypeError('Button.hide must be an instance of bool')
         self.title = title
@@ -31,7 +32,7 @@ class Buttons(object):
                     raise TypeError('Buttons.buttons items must be an instance of Button')
             self.buttons = buttons
 
-    def add(self, button):
+    def add(self, button: Button):
         if not isinstance(button, Button):
             raise TypeError('button items must be an instance of Button')
         self.buttons.append(button)

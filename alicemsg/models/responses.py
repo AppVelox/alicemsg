@@ -11,7 +11,7 @@ class AliceResponse(object):
             raise TypeError('Response.version must be an instance of str')
         session_keys = ('session_id', 'message_id', 'user_id')
         self.message = message
-        self.session = {session[key] for key in session_keys}
+        self.session = {key: session[key] for key in session_keys}
         self.version = version
 
     def to_dict(self):
