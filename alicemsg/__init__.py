@@ -1,2 +1,2 @@
 from .models import messages, requests, responses
-from .messenger_client import MessengerClient
+from .alice_client import AliceClient

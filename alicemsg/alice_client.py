@@ -3,7 +3,7 @@ from .models.requests import CallbackRequest, TextMessageRequest
 from .models.responses import AliceResponse
 
 
-class MessengerClient:
+class AliceClient:
     def __init__(self):
         self.text_message_processor = None
         self.callback_processor = None
