@@ -37,8 +37,8 @@ class TestMessengerClient:
             },
             "version": "1.0"
         }
-        response = client.process_json(msg_json)
-        assert response is None
+        with pytest.raises(AttributeError):
+            client.process_json(msg_json)
 
         msg_json = {
             "meta": {
@@ -68,8 +68,9 @@ class TestMessengerClient:
             },
             "version": "1.0"
         }
-        response = client.process_json(msg_json)
-        assert response is None
+
+        with pytest.raises(AttributeError):
+            client.process_json(msg_json)
 
     def test_text_message_processor(self):
         client = AliceClient()
