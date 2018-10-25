@@ -33,7 +33,7 @@ class AliceClient:
             raise TypeError('msg_json.request.type must be an instance of str')
         if msg_json['request']['type'] == 'SimpleUtterance':
             if not self.text_message_processor:
-                return None
+                raise AttributeError('text_message_processor not declared')
             request = TextMessageRequest(
                 session={'session_id': msg_json['session']['session_id'], 'user_id': msg_json['session']['user_id']},
                 locale=msg_json['meta']['locale'], timezone=msg_json['meta']['timezone'],
@@ -44,7 +44,7 @@ class AliceClient:
             return AliceResponse(message=message, session=msg_json['session'], version=msg_json['version'])
         elif msg_json['request']['type'] == 'ButtonPressed':
             if not self.callback_processor:
-                return None
+                raise AttributeError('callback_processor not declared')
             request = CallbackRequest(
                 session={'session_id': msg_json['session']['session_id'], 'user_id': msg_json['session']['user_id']},
                 locale=msg_json['meta']['locale'], timezone=msg_json['meta']['timezone'],
